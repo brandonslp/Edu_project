@@ -10,7 +10,9 @@ import com.google.gson.Gson;
 import java.util.List;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import pojos.Departamento;
+import pojos.Municipio;
 
 /**
  *
@@ -32,6 +34,21 @@ public class GestorWS {
         for (Departamento departamento : listD) {
             str+=departamento.getDepNombre()+"\n";
         }*/
+        return str;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getMunipsById")
+    public String getMunipsById(@WebParam(name = "idDept") int idDept) {
+        LocaleDAO ldao = new LocaleDAO();
+        List<Municipio> listM = ldao.getMunipsById(idDept);
+        //String str = new Gson().toJson(listM);
+        String str = "";
+        for (Municipio municipio : listM) {
+            str += municipio.getMunNombre()+". ";
+        }
         return str;
     }
 }
