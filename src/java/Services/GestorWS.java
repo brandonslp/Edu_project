@@ -128,6 +128,9 @@ public class GestorWS {
     public String validateDocente(@WebParam(name = "token") String token) {
         //TODO write your implementation code here:
         ValidatorDAO vdao = new ValidatorDAO();
-        return  String.valueOf(vdao.DocentePermission(token));
+        if (vdao.DocentePermission(token)) {
+            return token;
+        }
+        return  null;
     }
 }
